@@ -53,3 +53,27 @@ app.use(session({
 app.listen(5001, () => {
     console.log("Sever started on Port 5001")
 });
+
+app.post('/auth/index', function(req, res) {
+    res.redirect("/quiz");
+});
+
+app.post('/createAccount', function(req, res) {
+    res.redirect("/quiz");
+});
+
+app.get('/createAccount', function(req, res) {
+    res.render("createAccount");
+});
+
+app.get('/quiz', function(req, res) {
+    res.render("quiz");
+});
+
+app.post('/results', function(req, res) {
+    res.redirect("/results");
+});
+
+app.get('/results', function(req, res) {
+    res.render("results");
+});
