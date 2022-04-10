@@ -12,6 +12,7 @@ const { query } = require('express');
 var pg = require("pg");
 var fs = require("fs");
 const { Client } = require("pg");
+const e = require('connect-flash');
 
 dotenv.config({path: './.env'})
 
@@ -105,80 +106,63 @@ app.get('/quiz', function(req, res) {
     res.render("quiz");
 });
 
-app.post('/results', function(req, res) {
-    res.redirect("/results");
-});
+// app.post('/results', function(req, res) {
+//     res.redirect("/results");
+// });
 
-app.get('/results', function(req, res) {
+app.post('/results', function(req, res) {
     if (req.session.loggedin){
-<<<<<<< Updated upstream
-        var queryString = "WHERE rooms = '" + rooms + "' AND bathrm = '" + bathrooms + "' AND source IN ('";
-=======
-        var{rooms, bathrooms, residential, condominium, units, zipcode, 
+        const{rooms, bathrooms, residential, condominium, units, zipcode, 
             condition} = req.body;
             var temp = 0;
             var temp2 = 0;
-        var queryString = "WHERE rooms = " + '${rooms}' + " AND bathrm = " + bathrooms + " AND source IN (";
->>>>>>> Stashed changes
+        var queryString = "WHERE rooms = '" + rooms + "' AND bathrm = '" + bathrooms + "' AND source";
         if(residential==1){
-            queryString += "'residential'";
             temp = 1;
         }
         if(condominium==1){
             temp2 = 1;
-            if(temp==1){
-<<<<<<< Updated upstream
-                queryString += "', 'codominium')";
-            }
-            else{
-                queryString += "condominium')";
-=======
-                queryString += ", 'codominium')";
-            }
-            else{
-                queryString += "'condominium')";
->>>>>>> Stashed changes
-            }
         }
-        if(temp2==0){
-            queryString += "')";
+        if(temp==1&&temp2==1){
+            queryString += " IN ('Residential', 'Condominium')"
+        }
+        else if(temp==1){
+            queryString += " = 'Residential'";
+        }
+        else if (temp2==1){
+            queryString += " = 'Condominium'";
         }
         if(units==0){
-            queryString += " AND num_units = '1";
+            queryString += " AND num_units = '1'";
         }
-<<<<<<< Updated upstream
-            queryString += " AND zipcode = '" + zipcode;
-        
-        queryString += "' AND condition IN ";
-        if(poorCond==1){
-=======
-        queryString += " AND condition IN ";
+        queryString += " AND cndtn";
         if(condition==1){
->>>>>>> Stashed changes
-            queryString += "(1, 2, 3, 4, 5, 6)";
+            queryString += " IN ('Poor', 'Fair', 'Average', 'Good', 'Very Good', 'Excellent')";
         }
-        else if(condition==1){
-            queryString += "(2, 3, 4, 5, 6)";
+        else if(condition==2){
+            queryString += " IN ('Fair', 'Average', 'Good', 'Very Good', 'Excellent')";
         }
-        else if(condition==1){
-            queryString += "(3, 4, 5, 6)";   
+        else if(condition==3){
+            queryString += " IN ('Average', 'Good', 'Very Good', 'Excellent')";   
         }
-        else if(condition==1){
-            queryString += "(4, 5, 6)";      
+        else if(condition==4){
+            queryString += " IN ('Good', 'Very Good', 'Excellent')";      
         }
-        else if(condition==1){
-            queryString += "(5, 6)";
+        else if(condition==5){
+            queryString += " IN ('Very Good', 'Excellent')";
         }
-        else if(condition==1){
-            queryString += "(6)";
+        else if(condition==6){
+            queryString += "= 'Excellent'";
         }
-    db.query('SELECT fulladdress, rooms, bathrm, num_units, zipcode, source, condition FROM staging ' + queryString, function(error, results, fields){
+        queryString += " LIMIT 30";
+        console.log(queryString);
+    db.query('SELECT fulladdress, rooms, bathrm, num_units, zipcode, source, cndtn FROM staging ' + queryString, function(error, results, fields){
         if(error){
             console.log(error);
         }
         var listings = results;
         if (listings) {
-          return res.render('results', {listings: listings});
+          return res.render('results', {listings: listings.rows});
         } else {
             return res.render('results', {message: 'Listings not found!'});
         }

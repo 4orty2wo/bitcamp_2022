@@ -29,21 +29,24 @@
     <tbody>
   {{#each listings}}
   <tr>
-    <td>{{fulladdress}}</td>
-    <td>{{rooms}}</td>
-    <td>{{bathrm}}</td>
-    <td>{{num_units}}</td>
-    <td>{{zipcode}}</td>
-    <td>{{source}}</td>
-    <td>{{condition}}</td>
+    <td>{{this.fulladdress}}</td>
+    <td>{{this.rooms}}</td>
+    <td>{{this.bathrm}}</td>
+    <td>{{this.num_units}}</td>
+    <td>{{this.zipcode}}</td>
+    <td>{{this.source}}</td>
+    <td>{{this.cndtn}}</td>
   </tr>
   {{/each}}
 </tbody>
 </table>
 </div>
+{{#if message}}
+    <h4 class="alert alert-danger mt-4">{{message}}</h4>
+  {{/if}}
     <h3>Roommate Matches</h3>
     <div class="row">
-  <table>
+  {{!-- <table>
     <thead>
       <tr>
         <th>Email</th>
@@ -71,7 +74,7 @@
   </tr>
   {{/each}}
 </tbody>
-</table>
+</table> --}}
 </div>
 </body>
 </html>
