@@ -113,7 +113,15 @@ app.get('/results', function(req, res) {
     if (req.session.loggedin){
 <<<<<<< Updated upstream
         var queryString = "WHERE rooms = '" + rooms + "' AND bathrm = '" + bathrooms + "' AND source IN ('";
+=======
+        var{rooms, bathrooms, residential, condominium, units, zipcode, 
+            condition} = req.body;
+            var temp = 0;
+            var temp2 = 0;
+        var queryString = "WHERE rooms = " + '${rooms}' + " AND bathrm = " + bathrooms + " AND source IN (";
+>>>>>>> Stashed changes
         if(residential==1){
+            queryString += "'residential'";
             temp = 1;
         }
         if(condominium==1){
@@ -124,6 +132,12 @@ app.get('/results', function(req, res) {
             }
             else{
                 queryString += "condominium')";
+=======
+                queryString += ", 'codominium')";
+            }
+            else{
+                queryString += "'condominium')";
+>>>>>>> Stashed changes
             }
         }
         if(temp2==0){
@@ -137,16 +151,25 @@ app.get('/results', function(req, res) {
         
         queryString += "' AND condition IN ";
         if(poorCond==1){
+=======
+        queryString += " AND condition IN ";
+        if(condition==1){
+>>>>>>> Stashed changes
             queryString += "(1, 2, 3, 4, 5, 6)";
         }
+        else if(condition==1){
             queryString += "(2, 3, 4, 5, 6)";
         }
+        else if(condition==1){
             queryString += "(3, 4, 5, 6)";   
         }
+        else if(condition==1){
             queryString += "(4, 5, 6)";      
         }
+        else if(condition==1){
             queryString += "(5, 6)";
         }
+        else if(condition==1){
             queryString += "(6)";
         }
     db.query('SELECT fulladdress, rooms, bathrm, num_units, zipcode, source, condition FROM staging ' + queryString, function(error, results, fields){
