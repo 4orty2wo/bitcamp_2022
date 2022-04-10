@@ -76,12 +76,12 @@ app.listen(5001, () => {
     console.log("Sever started on Port 5001")
 });
 
-let user
+let person
 
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
     if (username && password) {
-        user = username
+        person = username
         db.query(`SELECT username,password FROM account WHERE username = '${username}' AND password = '${password}'`, function(error, results, fields) {
             if (results.rowCount > 0) {
                 req.session.loggedin = true;
@@ -120,8 +120,8 @@ app.post('/results', function(req, res) {
             var temp = 0;
             var temp2 = 0;
         var queryString = "WHERE rooms = '" + rooms + "' AND bathrm = '" + bathrooms + "' AND source";
-        var insertValues = `'${user}', `
-        var insertString = "INSERT INTO quiz_results VALUES (default, " + insertValues
+        var insertValues = `'${person}', `
+        var insertString = "INSERT INTO quiz_results (id, username, property_type, num_rooms, num_bathrom, units, condition) VALUES (default, " + insertValues
         if(residential==1){
             temp = 1;
         }
@@ -175,21 +175,26 @@ app.post('/results', function(req, res) {
         }
         queryString += " LIMIT 30";
         insertString += ')'
-        console.log(queryString);
+        console.log(insertString)
+        db.query(insertString)
     db.query('SELECT fulladdress, rooms, bathrm, num_units, zipcode, source, cndtn FROM staging ' + queryString, function(error, results, fields){
+        var listings = results;
+        insertQuery = `SELECT username, property_type, num_rooms, num_bathrom, units, condition FROM quiz_results LIMIT 8`
+        db.query(insertQuery, function(error, results, fields){
         if(error){
             console.log(error);
         }
+        
         var user = results;
-        if (user) {
-          return res.render('results', {user: user.rows});
+        if (listings && user) {
+          return res.render('results', {listings: listings.rows, user: user.rows});
         } else {
             return res.render('results', {message: 'Listings not found!'});
         }
     });
-    console.log(insertString)
-    db.query(insertString);
-}
+   
+});
+    }
 else{
     res.send("Please login!");
 }
