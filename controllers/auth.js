@@ -10,7 +10,7 @@ const db = mysql.createConnection({
 });
 
 exports.createAccount = (req,res) => {
-    const {fullname, username, password, email} = req.body;
+    const {username, email, fullname, password} = req.body;
 
     db.query("SELECT username,email FROM account WHERE username=? and email= ?", [username, email], async (error, results) => {
         if (error) {
