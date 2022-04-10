@@ -55,21 +55,21 @@ app.listen(5001, () => {
 });
 
 app.post('/auth/index', function(req, res) {
-    // const {username, password} = req.body;
-    // if (username && password) {
-    //     db.query('SELECT username,password FROM account WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
-    //         if (results.length > 0) {
-    //             req.session.loggedin = true;
-    //             req.session.username = username;
+    const {username, password} = req.body;
+    if (username && password) {
+        db.query('SELECT username,password FROM account WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+            if (results.length > 0) {
+                req.session.loggedin = true;
+                req.session.username = username;
                 res.redirect("/quiz");
-    //         }
-    //         else{   
-    //             return res.render("index",{
-    //             message: "Incorrect Username and/or Password"
-    //             });
-    //         }
-    //     });
-    // }
+            }
+            else{   
+                return res.render("index",{
+                message: "Incorrect Username and/or Password"
+                });
+            }
+        });
+    }
 }); 
 
 app.post('/createAccount', function(req, res) {
