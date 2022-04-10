@@ -9,16 +9,41 @@ const { CLIENT_FOUND_ROWS } = require('mysql/lib/protocol/constants/client');
 const { NULL } = require('mysql/lib/protocol/constants/types');
 const { count } = require('console');
 const { query } = require('express');
+var pg = require("pg");
+var fs = require("fs");
 
 dotenv.config({path: './.env'})
 
-const db = mysql.createConnection({
-    host: process.env.DATABASE_HOST, 
-    user: process.env.DATABASE_USER,
-    password:process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE,
-});
+// const db = mysql.createConnection({
+//     host: process.env.DATABASE_HOST, 
+//     user: process.env.DATABASE_USER,
+//     password:process.env.DATABASE_PASSWORD,
+//     database: process.env.DATABASE,
+// });
 
+// Connection to the database
+var config = {
+  user: "application_user",
+  host: "free-tier14.aws-us-east-1.cockroachlabs.cloud",
+  database: "rapid-sawfish-1171.app",
+  port: 26257
+};
+
+var pool = new pg.Pool(config);
+pool.connect(function (err, db, done) {
+
+    // Close the connection to the database and exit
+    var finish = function () {
+        done();
+        process.exit();
+    };
+
+    if (err) {
+        console.error('Error connecting to the CockroachDB', err);
+        finish();
+    }
+});
+  
 const publicDirectory = path.join(__dirname, "./public")
 app.use(express.static(publicDirectory))
 
@@ -29,14 +54,14 @@ app.use(express.json());
 
 app.set("view engine", "hbs");
 
-db.connect((error)=> {
-    if(error) {
-        console.log(error)
-    }
-    else{
-        console.log("MY SQL Connected..")
-    }
-})
+// db.connect((error)=> {
+//     if(error) {
+//         console.log(error)
+//     }
+//     else{
+//         console.log("MY SQL Connected..")
+//     }
+// })
 
 //Define Routes
 app.use("/", require("./routes/pages"))
