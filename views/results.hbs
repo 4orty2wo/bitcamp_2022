@@ -23,20 +23,18 @@
         <th>Number of Units</th>
         <th>Zipcode</th>
         <th>Property Type</th>
-        <th>Stories</th>
         <th>Condition</th>
       </tr>
     </thead>
     <tbody>
-  {{#each property}}
+  {{#each listings}}
   <tr>
-    <td>{{address}}</td>
+    <td>{{fulladdress}}</td>
     <td>{{rooms}}</td>
-    <td>{{bathrooms}}</td>
+    <td>{{bathrm}}</td>
     <td>{{num_units}}</td>
     <td>{{zipcode}}</td>
-    <td>{{property_type}}</td>
-    <td>{{stories}}</td>
+    <td>{{source}}</td>
     <td>{{condition}}</td>
   </tr>
   {{/each}}

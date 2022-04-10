@@ -13,7 +13,6 @@ body{
     height: 100%;
     overflow: auto;
     background: rgb(30,18,96);
-    background: linear-gradient(180deg, rgba(30,18,96,1) 0%, rgba(7,73,156,1) 37%, rgba(255,192,0,1) 100%);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -35,24 +34,24 @@ body{
       <div class="form-group">
         <label for="rooms">Number of rooms:</label>
         <select class="form-control" id="rooms" name="rooms">
-            <option>Any</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
+            <option value="0">Any</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
         </select>
 </div>
    <div class="form-group">
         <label for="bathrooms">Number of bathrooms:</label>
         <select class="form-control" id="bathrooms" name="bathrooms">
-            <option>Any</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+            <option value="0">Any</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
         </select>
 </div>
 <div class="form-group">
@@ -66,13 +65,13 @@ body{
   <input type="number" min="20000" max="29999" class="form-control" name="zipcode" id="zipcode">
 </div>
 <div class="form-group">
-    <label>Show me properties in the following condition:</label>
-    <label class="radio-inline"><input type="radio" id="poorCond" name="poorCond" value = "1" name="units">Yes</label>
-    <label class="radio-inline"><input type="radio" id="fairCond" name="fairCond" value = "0" name="units">No</label>
-    <label class="radio-inline"><input type="radio" id="avgCond" name="avgCond" value = "1" name="units">Yes</label>
-    <label class="radio-inline"><input type="radio" id="goodCond" name="goodCond" name="units">No</label>
-    <label class="radio-inline"><input type="radio" id="veryGoodCond" name="veryGoodCond" name="units">Yes</label>
-    <label class="radio-inline"><input type="radio" id="excellentCond" name="excellentCond" value = "0" name="units">No</label>
+    <label>Show me properties in AT LEAST the following condition:</label>
+    <label class="radio-inline"><input type="radio" id="poorCond" name="condition" value = "1">Poor Condition</label>
+    <label class="radio-inline"><input type="radio" id="fairCond" name="condition" value = "2">Fair Condition</label>
+    <label class="radio-inline"><input type="radio" id="avgCond" name="condition" value = "3">Average Condition</label>
+    <label class="radio-inline"><input type="radio" id="goodCond" name="condition" value="4">Good Condition</label>
+    <label class="radio-inline"><input type="radio" id="veryGoodCond" name="condition" value="5">Very Good Condition</label>
+    <label class="radio-inline"><input type="radio" id="excellentCond" name="condition" value = "6">Excellent Condition</label>
 </div>
       
     <button type="submit" class="btn btn-default">Submit</button>
