@@ -110,19 +110,16 @@ app.post('/results', function(req, res) {
 });
 
 app.get('/results', function(req, res) {
-    var{rooms, bathrooms, residential, condominium, units, zipcode, 
-        poorCond, fairCond, avgCond, goodCond, veryGoodCond, excellentCond} = req.body;
-        var temp = 0;
-        var temp2 = 0;
     if (req.session.loggedin){
+<<<<<<< Updated upstream
         var queryString = "WHERE rooms = '" + rooms + "' AND bathrm = '" + bathrooms + "' AND source IN ('";
         if(residential==1){
-            queryString += "residential";
             temp = 1;
         }
         if(condominium==1){
             temp2 = 1;
             if(temp==1){
+<<<<<<< Updated upstream
                 queryString += "', 'codominium')";
             }
             else{
@@ -135,25 +132,21 @@ app.get('/results', function(req, res) {
         if(units==0){
             queryString += " AND num_units = '1";
         }
+<<<<<<< Updated upstream
             queryString += " AND zipcode = '" + zipcode;
         
         queryString += "' AND condition IN ";
         if(poorCond==1){
             queryString += "(1, 2, 3, 4, 5, 6)";
         }
-        else if(fairCond==1){
             queryString += "(2, 3, 4, 5, 6)";
         }
-        else if(avgCond==1){
             queryString += "(3, 4, 5, 6)";   
         }
-        else if(goodCond==1){
             queryString += "(4, 5, 6)";      
         }
-        else if(veryGoodCond==1){
             queryString += "(5, 6)";
         }
-        else if(excellentCond==1){
             queryString += "(6)";
         }
     db.query('SELECT fulladdress, rooms, bathrm, num_units, zipcode, source, condition FROM staging ' + queryString, function(error, results, fields){
