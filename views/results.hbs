@@ -9,4 +9,71 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<body>
+
+    <h2>Preferences Quiz Results</h2>
+    <h3>Property Matches</h3>
+<div class="row">
+  <table>
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Rooms</th>
+        <th>Bathrooms</th>
+        <th>Number of Units</th>
+        <th>Zipcode</th>
+        <th>Property Type</th>
+        <th>Stories</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+  {{#each property}}
+  <tr>
+    <td>{{address}}</td>
+    <td>{{rooms}}</td>
+    <td>{{bathrooms}}</td>
+    <td>{{num_units}}</td>
+    <td>{{zipcode}}</td>
+    <td>{{property_type}}</td>
+    <td>{{stories}}</td>
+    <td>{{condition}}</td>
+  </tr>
+  {{/each}}
+</tbody>
+</table>
+</div>
+    <h3>Roommate Matches</h3>
+    <div class="row">
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Rooms</th>
+        <th>Bathrooms</th>
+        <th>Zipcode</th>
+        <th>Property Type</th>
+        <th>Stories</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+  {{#each user}}
+  <tr>
+    <td>{{email}}</td>
+    <td>{{name}}</td>
+    <td>{{rooms}}</td>
+    <td>{{bathrooms}}</td>
+    <td>{{num_units}}</td>
+    <td>{{zipcode}}</td>
+    <td>{{property_type}}</td>
+    <td>{{stories}}</td>
+    <td>{{condition}}</td>
+  </tr>
+  {{/each}}
+</tbody>
+</table>
+</div>
+</body>
 </html>
