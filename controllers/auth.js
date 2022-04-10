@@ -38,7 +38,7 @@ exports.createAccount = (req,res) => {
             }
             else{
                 console.log(results);
-                return res.render("quiz", {
+                return res.render("index", {
                     message:"User registered"
                 });
             }

@@ -8,25 +8,44 @@
     <link rel="stylesheet" href="/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+    h2 {
+  text-align: center;
+}
+body{
+    height: 100%;
+    overflow: auto;
+    background: rgb(133, 127, 165);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+</style>
 </head>
 <body>
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+    <img src="https://s7.gifyu.com/images/Bitcamp-Dynamic.gif" width="30" height="30" alt="">
+  </a>
+  </div>
+</nav>
     <div class="container">
-  <h2>Create Account</h2>
+  <h2><kbd>Create Account</kbd></h2>
       <form class="form-horizontal" action="/auth/createAccount" method="POST" id="createAccount">
      <div class="form-group">
-    <label for="username">Username:</label>
+    <label for="username"><kbd>Username:</kbd></label>
       <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
   </div>
   <div class="form-group">
-    <label for="email">Email:</label>
+    <label for="email"><kbd>Email:</kbd></label>
       <input type="text" class="form-control" id="email" name="email" placeholder="Enter email">
   </div>
   <div class="form-group">
-    <label for="fullname">Full name:</label>
+    <label for="fullname"><kbd>Full name:</kbd></label>
       <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter your full name">
   </div>
     <div class="form-group">
-      <label for="password">Password:</label>
+      <label for="password"><kbd>Password:</kbd></label>
       <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
     </div>
     <button type="submit" class="btn btn-default">Submit</button>

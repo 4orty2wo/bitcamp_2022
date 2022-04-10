@@ -8,13 +8,36 @@
     <link rel="stylesheet" href="/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+body{
+    height: 100%;
+    overflow: auto;
+    background: rgb(133, 127, 165);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+</style>
 </head>
 <body>
-
-    <h2>Preferences Quiz Results</h2>
-    <h3>Property Matches</h3>
-<div class="row">
-  <table>
+  <nav class="nav navbar-inverse">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+    <img src="https://s7.gifyu.com/images/Bitcamp-Dynamic.gif" width="30" height="30" alt="">
+  </a>
+   <ul class="nav navbar-nav">
+      <li><a href="/quiz">Quiz</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+    <h2><kbd>Preferences Quiz Results</kbd></h2>
+    <h3><kbd>Property Matches</kbd></h3>
+    
+<div class="row table-data">
+  <table class="styled-table" border="1">
     <thead>
       <tr>
         <th>Address</th>
@@ -44,37 +67,33 @@
 {{#if message}}
     <h4 class="alert alert-danger mt-4">{{message}}</h4>
   {{/if}}
-    <h3>Roommate Matches</h3>
-    <div class="row">
-  {{!-- <table>
+    <h3><kbd>Roommate Matches</kbd></h3>
+    <div class="row table-data">
+  <table class="styled-table" border="1">
     <thead>
       <tr>
-        <th>Email</th>
-        <th>Name</th>
+        <th>Username</th>
+        <th>Property Type</th>
         <th>Rooms</th>
         <th>Bathrooms</th>
-        <th>Zipcode</th>
-        <th>Property Type</th>
-        <th>Stories</th>
+        <th>Units</th>
         <th>Condition</th>
       </tr>
     </thead>
     <tbody>
   {{#each user}}
   <tr>
-    <td>{{email}}</td>
-    <td>{{name}}</td>
-    <td>{{rooms}}</td>
-    <td>{{bathrooms}}</td>
-    <td>{{num_units}}</td>
-    <td>{{zipcode}}</td>
+    <td>{{username}}</td>
     <td>{{property_type}}</td>
-    <td>{{stories}}</td>
+    <td>{{num_rooms}}</td>
+    <td>{{num_bathrom}}</td>
+    <td>{{units}}</td>
     <td>{{condition}}</td>
   </tr>
   {{/each}}
 </tbody>
-</table> --}}
+</table>
+</div>
 </div>
 </body>
 </html>

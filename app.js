@@ -135,6 +135,9 @@ app.post('/results', function(req, res) {
         if(units==0){
             queryString += " AND num_units = '1'";
         }
+        if(zipcode){
+            queryString += " AND zipcode ='" + zipcode + "'";
+        }
         queryString += " AND cndtn";
         if(condition==1){
             queryString += " IN ('Poor', 'Fair', 'Average', 'Good', 'Very Good', 'Excellent')";

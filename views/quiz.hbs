@@ -12,27 +12,41 @@
 body{
     height: 100%;
     overflow: auto;
-    background: rgb(30,18,96);
+    background: rgb(133, 127, 165);
     background-size: cover;
     background-repeat: no-repeat;
 }
 </style>
 </head>
 <body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+    <img src="https://s7.gifyu.com/images/Bitcamp-Dynamic.gif" width="30" height="30" alt="">
+  </a>
+  <ul class="nav navbar-nav">
+      <li class="active"><a href="/quiz">Quiz</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
     <div class="container">
-  <h2>Preferences Quiz</h2>
+  <h2><kbd>Preferences Quiz</kbd></h2>
       <form class="form-horizontal" action="/results" method="POST" id="quiz">
         <div class="form-group">
-            <label for="exampleFormControlInput1">Username</label>
+            <label for="exampleFormControlInput1"><kbd>Username</kbd></label>
             <input type="string" class="form-control" id="username">
   </div>
     <div class="form-group">
-        <label>Property type:</label>
+        <label><kbd>Property type:</kbd></label>
         <label class="checkbox-inline"><input type="checkbox" id="residential" name="residential" value="1">Residential</label>
         <label class="checkbox-inline"><input type="checkbox" id="condominium" name="condominium" value="1">Condomonium</label>
     </div>
       <div class="form-group">
-        <label for="rooms">Number of rooms:</label>
+        <label for="rooms"><kbd>Number of rooms:</kbd></label>
         <select class="form-control" id="rooms" name="rooms">
             <option value="0">Any</option>
             <option value="1">1</option>
@@ -59,7 +73,7 @@ body{
         </select>
 </div>
    <div class="form-group">
-        <label for="bathrooms">Number of bathrooms:</label>
+        <label for="bathrooms"><kbd>Number of bathrooms:</kbd></label>
         <select class="form-control" id="bathrooms" name="bathrooms">
             <option value="0">Any</option>
             <option value="1">1</option>
@@ -69,17 +83,17 @@ body{
         </select>
 </div>
 <div class="form-group">
-<label>Are you ok with multiple units in the building?</label>
+<label><kbd>Are you ok with multiple units in the building?</kbd></label>
       <label class="radio-inline"><input type="radio" id="yesUnits" value = "1" name="units">Yes</label>
         <label class="radio-inline"><input type="radio" id="noUnits" value = "0" name="units">No</label>
       </div>
 
       <div class="form-group">
-  <label for="zipcode">Zipcode:</label>
+  <label for="zipcode"><kbd>Zipcode:</kbd></label>
   <input type="number" min="20000" max="29999" class="form-control" name="zipcode" id="zipcode">
 </div>
 <div class="form-group">
-    <label>Show me properties in AT LEAST the following condition:</label>
+    <label><kbd>Show me properties in AT LEAST the following condition:</kbd></label>
     <label class="radio-inline"><input type="radio" id="poorCond" name="condition" value = "1">Poor Condition</label>
     <label class="radio-inline"><input type="radio" id="fairCond" name="condition" value = "2">Fair Condition</label>
     <label class="radio-inline"><input type="radio" id="avgCond" name="condition" value = "3">Average Condition</label>
