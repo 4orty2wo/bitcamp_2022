@@ -26,11 +26,15 @@ var config = {
   user: "application_user",
   host: "free-tier14.aws-us-east-1.cockroachlabs.cloud",
   database: "rapid-sawfish-1171.app",
-  port: 26257
+  password: "4fACrCFMu7ISf5qsDnftgw",
+  port: 26257,
+  ssl: {
+    ca: fs.readFileSync('.postgre.sql/root.crt').toString()
+  }   
 };
 
-var pool = new pg.Pool(config);
-pool.connect(function (err, db, done) {
+var db = new pg.Pool(config);
+db.connect(function (err, db, done) {
 
     // Close the connection to the database and exit
     var finish = function () {
