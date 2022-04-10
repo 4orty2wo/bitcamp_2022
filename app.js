@@ -11,6 +11,7 @@ const { count } = require('console');
 const { query } = require('express');
 var pg = require("pg");
 var fs = require("fs");
+const { Client } = require("pg");
 
 dotenv.config({path: './.env'})
 
@@ -22,18 +23,9 @@ dotenv.config({path: './.env'})
 // });
 
 // Connection to the database
-var config = {
-  user: "application_user",
-  host: "free-tier14.aws-us-east-1.cockroachlabs.cloud",
-  database: "rapid-sawfish-1171.app",
-  password: "4fACrCFMu7ISf5qsDnftgw",
-  port: 26257,
-  ssl: {
-    ca: fs.readFileSync('.postgresql/root.crt').toString()
-  }   
-};
 
-var db = new pg.Pool(config);
+const db = new Client(process.env.DATABASE_URL);
+
 db.connect(function (err, db, done) {
 
     // Close the connection to the database and exit
@@ -86,8 +78,8 @@ app.listen(5001, () => {
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
     if (username && password) {
-        db.query('SELECT username,password FROM account WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
-            if (results.length > 0) {
+        db.query(`SELECT username,password FROM account WHERE username = '${username}' AND password = '${password}'`, function(error, results, fields) {
+            if (results.rowCount > 0) {
                 req.session.loggedin = true;
                 req.session.username = username;
                 res.redirect("/quiz");
@@ -123,7 +115,7 @@ app.get('/results', function(req, res) {
         var temp = 0;
         var temp2 = 0;
     if (req.session.loggedin){
-        var queryString = "WHERE rooms = " + rooms + " AND bathrm = " + bathrooms + " AND source IN (";
+        var queryString = "WHERE rooms = '" + rooms + "' AND bathrm = '" + bathrooms + "' AND source IN ('";
         if(residential==1){
             queryString += "residential";
             temp = 1;
@@ -131,22 +123,21 @@ app.get('/results', function(req, res) {
         if(condominium==1){
             temp2 = 1;
             if(temp==1){
-                queryString += ", codominium)";
+                queryString += "', 'codominium')";
             }
             else{
-                queryString += "condominium)";
+                queryString += "condominium')";
             }
         }
         if(temp2==0){
-            queryString += ")";
+            queryString += "')";
         }
         if(units==0){
-            queryString += " AND num_units = 1";
+            queryString += " AND num_units = '1";
         }
-        if(zipcode){
-            queryString += " AND zipcode = " + zipcode;
-        }
-        queryString += " AND condition IN ";
+            queryString += " AND zipcode = '" + zipcode;
+        
+        queryString += "' AND condition IN ";
         if(poorCond==1){
             queryString += "(1, 2, 3, 4, 5, 6)";
         }

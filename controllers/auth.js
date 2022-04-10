@@ -21,8 +21,6 @@ exports.createAccount = (req,res) => {
             throw (error);
         }
         if (results.rowCount > 0) {
-            console.log("NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER ")
-            console.log(results.length)
             return res.render("createAccount",{
                 message:"That username or email is already in use"
             })
