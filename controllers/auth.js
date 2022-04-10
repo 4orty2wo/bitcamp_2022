@@ -1,29 +1,39 @@
 const mysql = require('mysql');
 const jwt=require("jsonwebtoken");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
+const { Client } = require("pg");
+const SQL = require('sql-template-strings');
+const { request } = require('express');
 
-const db = mysql.createConnection({
-    host: process.env.DATABASE_HOST,  //put ip address if not running on localhost
-    user: process.env.DATABASE_USER,
-    password:process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE,
-});
+const db = new Client(process.env.DATABASE_URL);
+
+db.connect();
 
 exports.createAccount = (req,res) => {
-    const {username, email, fullname, password} = req.body;
+    const {fullname, username, password, email} = req.body;
 
-    db.query("SELECT username,email FROM account WHERE username=? and email= ?", [username, email], async (error, results) => {
+    let search_query = (`SELECT username, email FROM account WHERE username = '${username}' AND email = '${email}'`)
+    console.log(search_query)
+    db.query(search_query, async (error, results) => {
+        console.log(results)
         if (error) {
             console.log(error);
+            throw (error);
         }
-        if (results.length > 0) {
+        if (results.rowCount > 0) {
+            console.log("NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER NIGGER ")
+            console.log(results.length)
             return res.render("createAccount",{
-                message: "That username or email is already in use"
+                message:"That username or email is already in use"
             })
+            
 
         }
-
-        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: password}, (error,results)=>{
+        
+        let values = `('${username}', '${email}', '${fullname}', '${password}')`
+        const insert_query = "INSERT INTO account VALUES " + values
+        console.log(insert_query);
+        db.query(insert_query, async (error,results)=>{
             if (error){
                 console.log(results);
                 console.log(error);

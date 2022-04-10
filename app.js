@@ -29,7 +29,7 @@ var config = {
   password: "4fACrCFMu7ISf5qsDnftgw",
   port: 26257,
   ssl: {
-    ca: fs.readFileSync('.postgre.sql/root.crt').toString()
+    ca: fs.readFileSync('.postgresql/root.crt').toString()
   }   
 };
 
