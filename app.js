@@ -55,8 +55,22 @@ app.listen(5001, () => {
 });
 
 app.post('/auth/index', function(req, res) {
-    res.redirect("/quiz");
-});
+    // const {username, password} = req.body;
+    // if (username && password) {
+    //     db.query('SELECT username,password FROM account WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+    //         if (results.length > 0) {
+    //             req.session.loggedin = true;
+    //             req.session.username = username;
+                res.redirect("/quiz");
+    //         }
+    //         else{   
+    //             return res.render("index",{
+    //             message: "Incorrect Username and/or Password"
+    //             });
+    //         }
+    //     });
+    // }
+}); 
 
 app.post('/createAccount', function(req, res) {
     res.redirect("/quiz");
@@ -75,5 +89,106 @@ app.post('/results', function(req, res) {
 });
 
 app.get('/results', function(req, res) {
-    res.render("results");
+    var{rooms, bathrooms, residential, condominium, units, zipcode, 
+        poorCond, faitCond, avgCond, goodCond, veryGoodCond, excellentCond} = req.body;
+        var temp = 0;
+        var temp2 = 0;
+        var condTemp = 0;
+    if (req.session.loggedin){
+        var queryString = "WHERE rooms = " + rooms + " AND bathrooms = " + bathrooms + " AND type IN (";
+        if(residential==1){
+            queryString += "residential";
+            temp = 1;
+        }
+        if(condominium==1){
+            temp2 = 1;
+            if(temp==1){
+                queryString += ", codominium)";
+            }
+            else{
+                queryString += "condominium)";
+            }
+        }
+        if(temp2==0){
+            queryString += ")";
+        }
+        if(units==0){
+            queryString += " AND units = 1";
+        }
+        queryString += " AND condition IN (";
+        if(poorCond==1){
+            queryString += "poor";
+            condTemp = 1;
+        }
+        if(fairCond==1){
+            if(condTemp==0){
+            queryString += "fair";
+            }
+            else{
+                queryString += ", fair";
+            }
+            condTemp = 1;
+        }
+        if(avgCond==1){
+            if(condTemp==0){
+            queryString += "average";
+            }
+            else{
+                queryString += ", average";
+            }
+            condTemp = 1;
+        }
+        if(goodCond==1){
+            if(condTemp==0){
+            queryString += "good";
+            }
+            else{
+                queryString += ", good";
+            }
+            condTemp = 1;
+        }
+        if(veryGoodCond==1){
+            if(condTemp==0){
+            queryString += "'very good'";
+            }
+            else{
+                queryString += ", 'very good'";
+            }
+            condTemp = 1;
+        }
+        if(excellentCond==1){
+            if(condTemp==0){
+            queryString += "excellent";
+            }
+            else{
+                queryString += ", excellent";
+            }
+            condTemp = 1;
+        }
+        queryString += ")";
+    db.query('SELECT [enter shit here once db is up] FROM listing ' + queryString, function(error, results, fields){
+        if(error){
+            console.log(error);
+        }
+        var listings = results;
+        if (listings) {
+          return res.render('results', {listings: listings});
+        } else {
+            return res.render('results', {message: 'Listings not found!'});
+        }
+    });
+}
+else{
+    res.send("Please login!");
+}
+});
+
+app.get("/logout",(req,res)=>{
+    req.session.destroy((err) => {
+        if(err){
+            return  console.error(err)
+        }
+        console.log("The session has been destroyed!")
+        res.redirect("/");
+    }) 
 });

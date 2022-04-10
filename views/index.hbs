@@ -9,31 +9,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <style>
-        .gradient-custom {
-/* fallback for old browsers */
-background: #6a11cb;
+        
 
-/* Chrome 10-25, Safari 5.1-6 */
-background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-
-/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+h3 {
+  text-align: center;
+}
+body {
+  background-image:url("https://i.ibb.co/rdXQBV9/camp.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
     </style>
 </head>
 
 <body>
-    <h3 class="text-center">Welcome Back</h3><br>
+<img src="https://s7.gifyu.com/images/Bitcamp-Dynamic.gif" alt="Bitcamp-Dynamic.gif" border="0" />
+<h3 class="center"><span> <kbd>Welcome back!</kbd> </span></h3><br>
 <div class="container">
     <form class="form-horizontal" action="/auth/index" method="POST" id="Login">
   <div class="form-group">
-    <label class="control-label col-sm-2" for="username">Username:</label>
+    <label class="control-label col-sm-2" for="username"><kbd>Username:</kbd></label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="username" placeholder="Enter username">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-2" for="password">Password:</label>
+    <label class="control-label col-sm-2" for="password"><kbd>Password:</kbd></label>
     <div class="col-sm-10">
       <input type="password" class="form-control" id="password" placeholder="Enter password">
     </div>

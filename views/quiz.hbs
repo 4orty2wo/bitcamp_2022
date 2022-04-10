@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+body{
+    height: 100%;
+    overflow: auto;
+    background: rgb(30,18,96);
+    background: linear-gradient(180deg, rgba(30,18,96,1) 0%, rgba(7,73,156,1) 37%, rgba(255,192,0,1) 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+</style>
 </head>
 <body>
     <div class="container">
@@ -23,8 +33,8 @@
         <label class="checkbox-inline"><input type="checkbox" id="condominium" value="1">Condomonium</label>
     </div>
       <div class="form-group">
-        <label for="roomSel">Number of rooms:</label>
-        <select class="form-control" id="roomSel">
+        <label for="rooms">Number of rooms:</label>
+        <select class="form-control" id="rooms" name="rooms">
             <option>Any</option>
             <option>1</option>
             <option>2</option>
@@ -36,8 +46,8 @@
         </select>
 </div>
    <div class="form-group">
-        <label for="bathroomSel">Number of bathrooms:</label>
-        <select class="form-control" id="bathroomSel">
+        <label for="bathrooms">Number of bathrooms:</label>
+        <select class="form-control" id="bathrooms" name="bathrooms">
             <option>Any</option>
             <option>1</option>
             <option>2</option>
@@ -47,22 +57,22 @@
 </div>
 <div class="form-group">
 <label>Are you ok with multiple units in the building?</label>
-      <label class="radio-inline"><input type="radio" name="optradio">Yes</label>
-        <label class="radio-inline"><input type="radio" name="optradio">No</label>
+      <label class="radio-inline"><input type="radio" id="yesUnits" value = "1" name="units">Yes</label>
+        <label class="radio-inline"><input type="radio" id="noUnits" value = "0" name="units">No</label>
       </div>
 
       <div class="form-group">
-  <label for="usr">Zipcode:</label>
-  <input type="text" class="form-control" id="zipcode">
+  <label for="zipcode">Zipcode:</label>
+  <input type="number" min="20000" max="29999" class="form-control" name="zipcode" id="zipcode">
 </div>
 <div class="form-group">
     <label>Show me properties in the following condition:</label>
-<label class="checkbox-inline"><input type="checkbox" value="1">Poor</label>
-<label class="checkbox-inline"><input type="checkbox" value="1">Fair</label>
-<label class="checkbox-inline"><input type="checkbox" value="1">Average</label>
-<label class="checkbox-inline"><input type="checkbox" value="1">Good</label>
-<label class="checkbox-inline"><input type="checkbox" value="1">Very Good</label>
-<label class="checkbox-inline"><input type="checkbox" value="1">Excellent</label>
+    <label class="radio-inline"><input type="radio" id="poorCond" name="poorCond" value = "1" name="units">Yes</label>
+    <label class="radio-inline"><input type="radio" id="fairCond" name="fairCond" value = "0" name="units">No</label>
+    <label class="radio-inline"><input type="radio" id="avgCond" name="avgCond" value = "1" name="units">Yes</label>
+    <label class="radio-inline"><input type="radio" id="goodCond" name="goodCond" name="units">No</label>
+    <label class="radio-inline"><input type="radio" id="veryGoodCond" name="veryGoodCond" name="units">Yes</label>
+    <label class="radio-inline"><input type="radio" id="excellentCond" name="excellentCond" value = "0" name="units">No</label>
 </div>
       
     <button type="submit" class="btn btn-default">Submit</button>
